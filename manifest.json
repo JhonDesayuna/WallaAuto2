@@ -1,0 +1,47 @@
+{
+  "manifest_version": 3,
+  "name": "Wallapop Auto Updater PRO",
+  "version": "2.0",
+  "description": "Actualización automática de productos en Wallapop",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage",
+    "tabs"
+  ],
+  "host_permissions": [
+    "*://*.wallapop.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.wallapop.com/item/*",
+        "*://*.wallapop.com/app/catalog/edit/*"
+      ],
+      "js": ["contentScript.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["settings.html"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
